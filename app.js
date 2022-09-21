@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const Record = require('./models/record')
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 mongoose.connect(process.env.MONGODB_URI, { 
   useNewUrlParser: true, 
@@ -24,10 +24,16 @@ db.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+app.use(express.static('public'))
+
+// 首頁
 app.get('/',(req, res) => {
   res.render('index')
 })
 
-app.listen(port, () => {
-  console.log(`This app is opening on http://localhost:${port} .`)
+// 網址結果
+
+
+app.listen(PORT, () => {
+  console.log(`This app is opening on http://localhost:${PORT} .`)
 })
