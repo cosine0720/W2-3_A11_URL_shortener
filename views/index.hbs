@@ -1,19 +1,18 @@
-<div class="container mt-5 px-md-5">
-  <div class="row">
-    <h1 class="text-center mb-5">URL Shortener</h1>
-    <div class="text-center">
-      <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png" class="url-image" alt="url-image">
-    </div>
-    <form action="/" method="POST">
-      <div class="mt-5 mb-3">
-        <input type="url" class="form-control" id="url" placeholder="請填入網站連結..."  aria-describedby="emailHelp">
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary col-3">👉 縮 起 來 ！👈</button>
-      </div>
-      
-  </form>
+<form action="/" method="POST">
+  <div class="mt-5 mb-3">
+    <input type="url" class="form-control" id="url" name="url" placeholder="請填入網站連結..." value={{url}}>
   </div>
-</div>
+  <div class="text-center mt-4 mb-5">
+    {{#if newUrl}}
 
+      <div class="alert alert-warning" role="alert">
+        <span class="mr-2 ">您 的 網 址 已 縮 短 ： </span> <code class="fs-4">{{newUrl}}</code>
+      </div>
+
+    {{/if}}
+
+    <button type="submit" class="btn btn-primary col-3">👉 縮 起 來 ！👈</button>
+  </div>
+  
+</form>
 
