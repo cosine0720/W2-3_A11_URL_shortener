@@ -6,11 +6,6 @@ function sample(array) {
 
 // define urlShortener function
 function urlShortener(url) {
-  // 未輸入則顯示錯誤通知！
-  // if (url.length === 0) {
-  //   return 'Oops🥵！ 這也太短了吧！'
-  // }
-
   // 定義元素
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
   const upperCaseLetters = lowerCaseLetters.toUpperCase()

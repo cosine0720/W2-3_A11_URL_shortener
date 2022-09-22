@@ -41,6 +41,23 @@ app.post('/',(req, res) => {
     .catch(error => console.error(error))
 })
 
+app.get("/:shortURL", (req, res) => {
+  const { shortURL } = req.params
+
+  URL.findOne({ shortURL })
+    .then(data => {
+      if (!data) {
+        return res.render("error", {
+          errorMsg: "Oops🥵！ 您尚未讓我縮短網址呦！",
+          errorURL: req.headers.host + "/" + shortURL,
+        })
+      }
+      
+      res.redirect(data.originalURL)
+    })
+    .catch(error => console.error(error))
+})
+
 app.listen(PORT, () => {
   console.log(`This app is opening on http://localhost:${PORT} .`)
 })
