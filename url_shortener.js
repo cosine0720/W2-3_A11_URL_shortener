@@ -1,11 +1,11 @@
 // define sample function to randomly return a item in an array
-function sample(array) {
+function sample (array) {
   const index = Math.floor(Math.random() * array.length)
   return array[index]
 }
 
 // define urlShortener function
-function urlShortener(url) {
+function urlShortener (url) {
   // 定義元素
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
   const upperCaseLetters = lowerCaseLetters.toUpperCase()
@@ -19,8 +19,6 @@ function urlShortener(url) {
 
   // 產生五碼亂數
   let shortener = ''
-  // https://cosine-url.herokuapp.com/
-  
   for (let i = 0; i < 5; i++) {
     shortener += sample(collection)
   }

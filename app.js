@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-require("./config/mongoose")
+require('./config/mongoose')
 
 const urlShortener = require('./url_shortener')
 const URL = require('./models/URL')
@@ -16,43 +16,43 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
 // 首頁
-app.get('/',(req, res) => {
+app.get('/', (req, res) => {
   res.render('index')
 })
 
 // 網址結果
-app.post('/',(req, res) => {
+app.post('/', (req, res) => {
   const url = req.body.url
   const shortURL = urlShortener(url)
 
-  if (!url) return res.redirect("/")
+  if (!url) return res.render('error', { errorMsg: 'Oops🥵！ 這也太短了吧！' })
 
   URL.findOne({ originalURL: url })
     .then(data =>
       data ? data : URL.create({ shortURL, originalURL: url })
     )
     .then(data =>
-      res.render("index", {
+      res.render('index', {
         url,
         origin: req.headers.origin,
-        shortURL: data.shortURL,
+        shortURL: data.shortURL
       })
     )
     .catch(error => console.error(error))
 })
 
-app.get("/:shortURL", (req, res) => {
+app.get('/:shortURL', (req, res) => {
   const { shortURL } = req.params
 
   URL.findOne({ shortURL })
     .then(data => {
       if (!data) {
-        return res.render("error", {
-          errorMsg: "Oops🥵！ 您尚未讓我縮短網址呦！",
-          errorURL: req.headers.host + "/" + shortURL,
+        return res.render('error', {
+          errorMsg: 'Oops！ 您這是自己亂打的嗎？🥵 我沒縮短過這個唷！',
+          errorURL: req.headers.host + '/' + shortURL
         })
       }
-      
+
       res.redirect(data.originalURL)
     })
     .catch(error => console.error(error))
